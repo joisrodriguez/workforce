@@ -2,17 +2,16 @@
 
 Este proyecto recrea el formulario de Registro de Fallos de Nivel de Servicio (NS) de Falabella en una aplicación web interactiva moderna. Está construido con **React (Vite)**, respaldado por un servidor **Node.js (Express)** y una base de datos **PostgreSQL**, todo empaquetado en **Docker** mediante **Docker Compose** para un despliegue inmediato.
 
-## 🚀 Requisitos Previos
+## Requisitos Previos
 
 - [Docker](https://www.docker.com/products/docker-desktop/) instalado y ejecutándose.
 - [Docker Compose](https://docs.docker.com/compose/) (viene incluido por defecto con Docker Desktop).
 
 ---
 
-## 🛠️ Cómo Levantar la Aplicación en Local
-
-1. Abre una terminal (PowerShell, Command Prompt o terminal Git) en la carpeta raíz del proyecto:
-   `C:\Users\Dyck.lopez\.gemini\antigravity\scratch\formulario-seguimiento-ns`
+##  Cómo Levantar la Aplicación en Local
+1. Abre una terminal (PowerShell, Command Prompt o terminal Git) en la carpeta raíz donde se encuentra el proyecto:
+   `C:\Users\usuario\formulario-seguimiento-ns`
 
 2. Ejecuta el comando para compilar e iniciar todos los servicios:
    ```bash
@@ -23,11 +22,11 @@ Este proyecto recrea el formulario de Registro de Fallos de Nivel de Servicio (N
 
 4. Una vez levantado, abre tu navegador favorito y accede a:
    * **Frontend (Aplicación Principal)**: [http://localhost:3000](http://localhost:3000)
-   * **Backend API (Prueba de salud)**: [http://localhost:5001/api/health](http://localhost:5001/api/health)
+   * **Backend API (Prueba de salud)**: [http://localhost:5000/api/health](http://localhost:5000/api/health)
 
 ---
 
-## 📦 Arquitectura y Servicios
+## Arquitectura y Servicios
 
 El entorno de Docker Compose levanta tres servicios conectados en red:
 
@@ -45,7 +44,7 @@ El entorno de Docker Compose levanta tres servicios conectados en red:
 
 ---
 
-## 💾 Detalle de Endpoints de la API
+## Detalle de Endpoints de la API
 
 * **`POST /api/registros`**: Guarda el registro del formulario.
   - *Payload*:
@@ -65,7 +64,7 @@ El entorno de Docker Compose levanta tres servicios conectados en red:
 
 ---
 
-## 🛡️ Estructura de Tablas en la Base de Datos
+## Estructura de Tablas en la Base de Datos
 
 ### Tabla `registros`
 Almacena la cabecera identificativa de cada reporte de fallos.

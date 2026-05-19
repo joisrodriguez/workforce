@@ -1,0 +1,25 @@
+# Dependencias de Node
+**/node_modules/
+
+# Entornos y Credenciales
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Compilación y producción
+frontend/dist/
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos de Sistema
+.DS_Store
+Thumbs.db

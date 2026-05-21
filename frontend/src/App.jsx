@@ -64,7 +64,7 @@ const CAUSAS = [
   'Ausentismo',
   'Caída de aplicativos',
   'Falla técnica (Internet)',
-  'Picos de interacciones',
+  'Desvío del Forecast',
   'Retardos',
   'TMO elevados'
 ];
@@ -88,6 +88,7 @@ export default function App() {
   );
 
   // ── ESTADO DE LA APLICACIÓN ──────────────────────────────────────────────
+  const [observaciones, setObservaciones] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toasts, setToasts] = useState([]);
   const [historial, setHistorial] = useState([]);
@@ -164,7 +165,7 @@ export default function App() {
       const res = await fetch('/api/registros', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ operador, cola, fecha, intervalos })
+        body: JSON.stringify({ operador, cola, fecha, intervalos, observaciones })
       });
       const data = await res.json();
 
@@ -188,6 +189,7 @@ export default function App() {
     setCola('');
     setFecha(getTodayDateString());
     setIntervalos(HORAS.reduce((acc, h) => ({ ...acc, [h]: '' }), {}));
+    setObservaciones('');
   };
 
   return (
@@ -319,8 +321,39 @@ export default function App() {
             </table>
           </div>
 
+          {/* Observaciones */}
+          <div className="card">
+            <div className="card-header">
+              <span className="card-title">Observaciones</span>
+              <span style={{ fontSize: '11px', color: '#5a6a85' }}>
+                {observaciones.length}/800
+              </span>
+            </div>
+            <textarea
+              value={observaciones}
+              onChange={(e) => setObservaciones(e.target.value.slice(0, 800))}
+              maxLength={800}
+              rows={4}
+              placeholder="Agrega comentarios adicionales sobre los fallos registrados (opcional)..."
+              style={{
+                width: '100%',
+                resize: 'vertical',
+                padding: '10px 12px',
+                border: '1.5px solid #dde3ee',
+                borderRadius: '8px',
+                fontFamily: 'inherit',
+                fontSize: '13px',
+                color: '#2d3a4e',
+                background: '#f8fafc',
+                boxSizing: 'border-box',
+                outline: 'none',
+                lineHeight: '1.5'
+              }}
+            />
+          </div>
+
           {/* Botón de Guardado */}
-          <button 
+          <button
             type="submit" 
             className="btn-submit" 
             disabled={isSubmitting || !operador || !cola || !fecha || failedCount === 0}

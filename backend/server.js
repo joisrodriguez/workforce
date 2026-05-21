@@ -16,7 +16,7 @@ app.get('/api/health', (req, res) => {
 
 // Guardar nuevo registro de fallas
 app.post('/api/registros', async (req, res) => {
-  const { operador, cola, fecha, intervalos } = req.body;
+  const { operador, cola, fecha, intervalos, observaciones } = req.body;
 
   if (!operador || !cola || !fecha) {
     return res.status(400).json({ success: false, error: 'Faltan campos requeridos (operador, cola, fecha).' });
@@ -39,11 +39,11 @@ app.post('/api/registros', async (req, res) => {
 
     // Insertar cabecera de registro
     const insertHeaderQuery = `
-      INSERT INTO registros (operador, cola, fecha)
-      VALUES ($1, $2, $3)
+      INSERT INTO registros (operador, cola, fecha, observaciones)
+      VALUES ($1, $2, $3, $4)
       RETURNING id, operador, cola, TO_CHAR(fecha, 'YYYY-MM-DD') as fecha_fmt;
     `;
-    const headerResult = await client.query(insertHeaderQuery, [operador, cola, fecha]);
+    const headerResult = await client.query(insertHeaderQuery, [operador, cola, fecha, observaciones || null]);
     const registroId = headerResult.rows[0].id;
 
     // Insertar cada intervalo fallido

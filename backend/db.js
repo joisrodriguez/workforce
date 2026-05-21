@@ -19,8 +19,14 @@ async function initDb() {
           operador VARCHAR(10) NOT NULL,
           cola VARCHAR(100) NOT NULL,
           fecha DATE NOT NULL,
+          observaciones TEXT,
           creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+      `);
+
+      // Migración: agregar columna si la tabla ya existía sin ella
+      await client.query(`
+        ALTER TABLE registros ADD COLUMN IF NOT EXISTS observaciones TEXT;
       `);
 
       // Crear tabla intervalos_fallidos
